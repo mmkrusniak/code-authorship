@@ -1,0 +1,36 @@
+1) Counts by node type (unitrees)
+
+2) Counts of bitrees / appearances of single node with parent
+
+3) Counts of tritrees / appearances of single node, parent, and grandparent
+
+
+
+This is what the trees will look like:
+
+{"name": "CompilationUnit", "children": [
+  {"name": "ClassOrInterfaceDeclaration", "children": [
+    {"name": "SimpleName"}, {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, {"name": "Parameter", "children": [
+        {"name": "ArrayType", "children": [
+          {"name": "ClassOrInterfaceType", "children": [
+            {"name": "SimpleName"}
+          ]}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "VoidType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ExpressionStmt", "children": [
+          {"name": "VariableDeclarationExpr", "children": [
+            {"name": "VariableDeclarator", "children": [
+              {"name": "PrimitiveType"}, 
+              {"name": "SimpleName"}, 
+              {"name": "IntegerLiteralExpr"}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}
+]}
