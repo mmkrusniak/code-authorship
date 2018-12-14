@@ -1,0 +1,62 @@
+{"name": "CompilationUnit", "children": [
+  {"name": "PackageDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name"}
+    ]}
+  ]}, 
+  {"name": "ClassOrInterfaceDeclaration", "children": [
+    {"name": "SimpleName"}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "PrimitiveType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "IfStmt", "children": [
+          {"name": "BinaryExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "NullLiteralExpr"}
+          ]}, 
+          {"name": "BlockStmt", "children": [
+            {"name": "ReturnStmt", "children": [
+              {"name": "BooleanLiteralExpr"}
+            ]}
+          ]}
+        ]}, 
+        {"name": "ReturnStmt", "children": [
+          {"name": "BinaryExpr", "children": [
+            {"name": "MethodCallExpr", "children": [
+              {"name": "NameExpr", "children": [
+                {"name": "SimpleName"}
+              ]}, 
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "IntegerLiteralExpr"}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}
+]}

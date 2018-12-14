@@ -1,0 +1,122 @@
+{"name": "CompilationUnit", "children": [
+  {"name": "PackageDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name"}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ImportDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name", "children": [
+            {"name": "Name"}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ImportDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name", "children": [
+            {"name": "Name"}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ImportDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name", "children": [
+            {"name": "Name"}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ImportDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name", "children": [
+            {"name": "Name"}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ClassOrInterfaceDeclaration", "children": [
+    {"name": "SimpleName"}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "NullLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ReturnStmt", "children": [
+          {"name": "ObjectCreationExpr", "children": [
+            {"name": "ClassOrInterfaceType", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "ConstructorDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ExpressionStmt", "children": [
+          {"name": "AssignExpr", "children": [
+            {"name": "FieldAccessExpr", "children": [
+              {"name": "ThisExpr"}, 
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "ClassOrInterfaceType", "children": [
+      {"name": "SimpleName"}
+    ]}
+  ]}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "JavadocComment"}
+]}

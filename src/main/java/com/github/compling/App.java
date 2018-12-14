@@ -3,6 +3,7 @@ package com.github.compling;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
@@ -21,10 +22,12 @@ public class App {
             File[] files = dir.listFiles();
             if (files != null) {
                 for(File subdir: files) for(File file: subdir.listFiles()) {
-                    ArrayList<String> resultsArray = new ArrayList<String>();
-                    resultsArray.add(toJSON(JavaParser.parse(file), 0));
-                    Path outFile = Paths.get("out" + File.separator + subdir.getName() + File.separator + file.getName().replace(".java", ".json"));
-                    Files.write(outFile, resultsArray, Charset.forName("UTF-8"), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+                	if (file.getName().endsWith(".java")) {
+                		ArrayList<String> resultsArray = new ArrayList<String>();
+                        resultsArray.add(toJSON(JavaParser.parse(file), 0));
+                        Path outFile = Paths.get("out" + File.separator + subdir.getName() + File.separator + file.getName().replace(".java", ".json"));
+                        Files.write(outFile, resultsArray, Charset.forName("UTF-8"), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+                	}
                 }
             }
         }
@@ -33,6 +36,27 @@ public class App {
         }
     }
 
+    public static void parseDir(File dir, File outDir) {
+    	File[] files = dir.listFiles();
+    	if (files != null) {
+    		for (File subFile : files) {
+    			if (subFile.isDirectory()) {
+    				parseDir(subFile, outDir);
+    			}
+    			else if (subFile.getName().endsWith(".java")) {
+    				ArrayList<String> resultsArray = new ArrayList<String>();
+    				try {
+						resultsArray.add(toJSON(JavaParser.parse(subFile), 0));
+						Path outFile = Paths.get("out" + File.separator + outDir.getName() + File.separator + subFile.getName().replace(".java", ".json"));
+						Files.write(outFile, resultsArray, Charset.forName("UTF-8"), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+    			}
+    		}
+    	}
+    }
+    
     public static String toJSON(Node root, int depth) {
         java.util.List<Node> children = root.getChildNodes();
 

@@ -1,0 +1,586 @@
+{"name": "CompilationUnit", "children": [
+  {"name": "PackageDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name"}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ClassOrInterfaceDeclaration", "children": [
+    {"name": "SimpleName"}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "MethodCallExpr", "children": [
+          {"name": "StringLiteralExpr"}, 
+          {"name": "SimpleName"}
+        ]}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "MethodCallExpr", "children": [
+          {"name": "StringLiteralExpr"}, 
+          {"name": "SimpleName"}
+        ]}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "MethodCallExpr", "children": [
+          {"name": "StringLiteralExpr"}, 
+          {"name": "SimpleName"}
+        ]}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "MethodCallExpr", "children": [
+          {"name": "StringLiteralExpr"}, 
+          {"name": "SimpleName"}
+        ]}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "MethodCallExpr", "children": [
+          {"name": "StringLiteralExpr"}, 
+          {"name": "SimpleName"}
+        ]}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "MethodCallExpr", "children": [
+          {"name": "StringLiteralExpr"}, 
+          {"name": "SimpleName"}
+        ]}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "MethodCallExpr", "children": [
+          {"name": "StringLiteralExpr"}, 
+          {"name": "SimpleName"}
+        ]}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "MethodCallExpr", "children": [
+          {"name": "StringLiteralExpr"}, 
+          {"name": "SimpleName"}
+        ]}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "StringLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ArrayType", "children": [
+          {"name": "PrimitiveType"}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "ArrayInitializerExpr", "children": [
+          {"name": "CastExpr", "children": [
+            {"name": "PrimitiveType"}, 
+            {"name": "CharLiteralExpr"}
+          ]}, 
+          {"name": "CastExpr", "children": [
+            {"name": "PrimitiveType"}, 
+            {"name": "CharLiteralExpr"}
+          ]}, 
+          {"name": "CastExpr", "children": [
+            {"name": "PrimitiveType"}, 
+            {"name": "CharLiteralExpr"}
+          ]}, 
+          {"name": "CastExpr", "children": [
+            {"name": "PrimitiveType"}, 
+            {"name": "CharLiteralExpr"}
+          ]}, 
+          {"name": "CastExpr", "children": [
+            {"name": "PrimitiveType"}, 
+            {"name": "CharLiteralExpr"}
+          ]}, 
+          {"name": "CastExpr", "children": [
+            {"name": "PrimitiveType"}, 
+            {"name": "CharLiteralExpr"}
+          ]}, 
+          {"name": "CastExpr", "children": [
+            {"name": "PrimitiveType"}, 
+            {"name": "CharLiteralExpr"}
+          ]}, 
+          {"name": "CastExpr", "children": [
+            {"name": "PrimitiveType"}, 
+            {"name": "CharLiteralExpr"}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ArrayType", "children": [
+          {"name": "ClassOrInterfaceType", "children": [
+            {"name": "SimpleName"}
+          ]}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "ArrayInitializerExpr", "children": [
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}
+        ]}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ArrayType", "children": [
+          {"name": "ClassOrInterfaceType", "children": [
+            {"name": "SimpleName"}
+          ]}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "ArrayInitializerExpr", "children": [
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}
+        ]}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ArrayType", "children": [
+          {"name": "ClassOrInterfaceType", "children": [
+            {"name": "SimpleName"}
+          ]}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "ArrayInitializerExpr", "children": [
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}
+        ]}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ArrayType", "children": [
+          {"name": "ClassOrInterfaceType", "children": [
+            {"name": "SimpleName"}
+          ]}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "ArrayInitializerExpr", "children": [
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}
+        ]}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ArrayType", "children": [
+          {"name": "ClassOrInterfaceType", "children": [
+            {"name": "SimpleName"}
+          ]}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "ArrayInitializerExpr", "children": [
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}, 
+          {"name": "StringLiteralExpr"}
+        ]}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "IntegerLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "JavadocComment"}
+  ]}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}
+]}

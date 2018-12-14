@@ -1,0 +1,106 @@
+{"name": "CompilationUnit", "children": [
+  {"name": "PackageDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name"}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ImportDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name"}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ImportDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name"}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ImportDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name"}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ImportDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name"}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "AnnotationDeclaration", "children": [
+    {"name": "SingleMemberAnnotationExpr", "children": [
+      {"name": "Name"}, 
+      {"name": "FieldAccessExpr", "children": [
+        {"name": "NameExpr", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}
+    ]}, 
+    {"name": "SingleMemberAnnotationExpr", "children": [
+      {"name": "Name"}, 
+      {"name": "ArrayInitializerExpr", "children": [
+        {"name": "FieldAccessExpr", "children": [
+          {"name": "NameExpr", "children": [
+            {"name": "SimpleName"}
+          ]}, 
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "FieldAccessExpr", "children": [
+          {"name": "NameExpr", "children": [
+            {"name": "SimpleName"}
+          ]}, 
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "FieldAccessExpr", "children": [
+          {"name": "NameExpr", "children": [
+            {"name": "SimpleName"}
+          ]}, 
+          {"name": "SimpleName"}
+        ]}
+      ]}
+    ]}, 
+    {"name": "SimpleName"}, 
+    {"name": "AnnotationMemberDeclaration", "children": [
+      {"name": "ArrayType", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}
+      ]}, 
+      {"name": "SimpleName"}
+    ]}
+  ]}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}
+]}

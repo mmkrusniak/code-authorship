@@ -1,0 +1,53 @@
+{"name": "CompilationUnit", "children": [
+  {"name": "PackageDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name"}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ClassOrInterfaceDeclaration", "children": [
+    {"name": "SimpleName"}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "ArrayType", "children": [
+          {"name": "ClassOrInterfaceType", "children": [
+            {"name": "SimpleName"}
+          ]}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "VoidType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ExpressionStmt", "children": [
+          {"name": "MethodCallExpr", "children": [
+            {"name": "FieldAccessExpr", "children": [
+              {"name": "FieldAccessExpr", "children": [
+                {"name": "FieldAccessExpr", "children": [
+                  {"name": "FieldAccessExpr", "children": [
+                    {"name": "NameExpr", "children": [
+                      {"name": "SimpleName"}
+                    ]}, 
+                    {"name": "SimpleName"}
+                  ]}, 
+                  {"name": "SimpleName"}
+                ]}, 
+                {"name": "SimpleName"}
+              ]}, 
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "SimpleName"}, 
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "JavadocComment"}
+]}

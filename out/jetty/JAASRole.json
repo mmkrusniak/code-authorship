@@ -1,0 +1,109 @@
+{"name": "CompilationUnit", "children": [
+  {"name": "PackageDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name"}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ClassOrInterfaceDeclaration", "children": [
+    {"name": "SimpleName"}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "LongLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "ConstructorDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ExplicitConstructorInvocationStmt", "children": [
+          {"name": "NameExpr", "children": [
+            {"name": "SimpleName"}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "MarkerAnnotationExpr", "children": [
+        {"name": "Name"}
+      ]}, 
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "PrimitiveType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "IfStmt", "children": [
+          {"name": "UnaryExpr", "children": [
+            {"name": "EnclosedExpr", "children": [
+              {"name": "InstanceOfExpr", "children": [
+                {"name": "NameExpr", "children": [
+                  {"name": "SimpleName"}
+                ]}, 
+                {"name": "ClassOrInterfaceType", "children": [
+                  {"name": "SimpleName"}
+                ]}
+              ]}
+            ]}
+          ]}, 
+          {"name": "ReturnStmt", "children": [
+            {"name": "BooleanLiteralExpr"}
+          ]}
+        ]}, 
+        {"name": "ReturnStmt", "children": [
+          {"name": "MethodCallExpr", "children": [
+            {"name": "MethodCallExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "SimpleName"}, 
+            {"name": "MethodCallExpr", "children": [
+              {"name": "EnclosedExpr", "children": [
+                {"name": "CastExpr", "children": [
+                  {"name": "ClassOrInterfaceType", "children": [
+                    {"name": "SimpleName"}
+                  ]}, 
+                  {"name": "NameExpr", "children": [
+                    {"name": "SimpleName"}
+                  ]}
+                ]}
+              ]}, 
+              {"name": "SimpleName"}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "ClassOrInterfaceType", "children": [
+      {"name": "SimpleName"}
+    ]}
+  ]}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}
+]}

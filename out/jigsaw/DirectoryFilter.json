@@ -1,0 +1,102 @@
+{"name": "CompilationUnit", "children": [
+  {"name": "PackageDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name"}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ImportDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name"}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ImportDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name"}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ClassOrInterfaceDeclaration", "children": [
+    {"name": "SimpleName"}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "PrimitiveType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ReturnStmt", "children": [
+          {"name": "EnclosedExpr", "children": [
+            {"name": "BinaryExpr", "children": [
+              {"name": "BinaryExpr", "children": [
+                {"name": "EnclosedExpr", "children": [
+                  {"name": "UnaryExpr", "children": [
+                    {"name": "MethodCallExpr", "children": [
+                      {"name": "NameExpr", "children": [
+                        {"name": "SimpleName"}
+                      ]}, 
+                      {"name": "SimpleName"}, 
+                      {"name": "StringLiteralExpr"}
+                    ]}
+                  ]}
+                ]}, 
+                {"name": "EnclosedExpr", "children": [
+                  {"name": "UnaryExpr", "children": [
+                    {"name": "MethodCallExpr", "children": [
+                      {"name": "NameExpr", "children": [
+                        {"name": "SimpleName"}
+                      ]}, 
+                      {"name": "SimpleName"}, 
+                      {"name": "StringLiteralExpr"}
+                    ]}
+                  ]}
+                ]}
+              ]}, 
+              {"name": "MethodCallExpr", "children": [
+                {"name": "EnclosedExpr", "children": [
+                  {"name": "ObjectCreationExpr", "children": [
+                    {"name": "ClassOrInterfaceType", "children": [
+                      {"name": "SimpleName"}
+                    ]}, 
+                    {"name": "NameExpr", "children": [
+                      {"name": "SimpleName"}
+                    ]}, 
+                    {"name": "NameExpr", "children": [
+                      {"name": "SimpleName"}
+                    ]}
+                  ]}
+                ]}, 
+                {"name": "SimpleName"}
+              ]}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "ConstructorDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ExplicitConstructorInvocationStmt"}
+      ]}
+    ]}, 
+    {"name": "ClassOrInterfaceType", "children": [
+      {"name": "SimpleName"}
+    ]}
+  ]}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}
+]}

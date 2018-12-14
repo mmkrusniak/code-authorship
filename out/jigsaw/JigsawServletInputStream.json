@@ -1,0 +1,433 @@
+{"name": "CompilationUnit", "children": [
+  {"name": "PackageDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name"}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ImportDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name"}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ImportDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name"}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ImportDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name"}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ClassOrInterfaceDeclaration", "children": [
+    {"name": "SimpleName"}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}, 
+        {"name": "NullLiteralExpr"}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "PrimitiveType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ReturnStmt", "children": [
+          {"name": "MethodCallExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "SimpleName"}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "ArrayType", "children": [
+          {"name": "PrimitiveType"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "PrimitiveType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ReturnStmt", "children": [
+          {"name": "MethodCallExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "SimpleName"}, 
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "IntegerLiteralExpr"}, 
+            {"name": "FieldAccessExpr", "children": [
+              {"name": "NameExpr", "children": [
+                {"name": "SimpleName"}
+              ]}, 
+              {"name": "SimpleName"}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "ArrayType", "children": [
+          {"name": "PrimitiveType"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "Parameter", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "Parameter", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "PrimitiveType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ReturnStmt", "children": [
+          {"name": "MethodCallExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "SimpleName"}, 
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "PrimitiveType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ReturnStmt", "children": [
+          {"name": "MethodCallExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "SimpleName"}, 
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "PrimitiveType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ReturnStmt", "children": [
+          {"name": "MethodCallExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "SimpleName"}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "VoidType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ExpressionStmt", "children": [
+          {"name": "MethodCallExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "SimpleName"}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "VoidType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ExpressionStmt", "children": [
+          {"name": "MethodCallExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "SimpleName"}, 
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "VoidType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ExpressionStmt", "children": [
+          {"name": "MethodCallExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "SimpleName"}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "PrimitiveType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ReturnStmt", "children": [
+          {"name": "MethodCallExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "SimpleName"}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "ArrayType", "children": [
+          {"name": "PrimitiveType"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "Parameter", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "Parameter", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "PrimitiveType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ExpressionStmt", "children": [
+          {"name": "VariableDeclarationExpr", "children": [
+            {"name": "VariableDeclarator", "children": [
+              {"name": "PrimitiveType"}, 
+              {"name": "SimpleName"}, 
+              {"name": "IntegerLiteralExpr"}
+            ]}
+          ]}
+        ]}, 
+        {"name": "WhileStmt", "children": [
+          {"name": "BinaryExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}
+          ]}, 
+          {"name": "BlockStmt", "children": [
+            {"name": "ExpressionStmt", "children": [
+              {"name": "VariableDeclarationExpr", "children": [
+                {"name": "VariableDeclarator", "children": [
+                  {"name": "PrimitiveType"}, 
+                  {"name": "SimpleName"}, 
+                  {"name": "MethodCallExpr", "children": [
+                    {"name": "NameExpr", "children": [
+                      {"name": "SimpleName"}
+                    ]}, 
+                    {"name": "SimpleName"}
+                  ]}
+                ]}
+              ]}
+            ]}, 
+            {"name": "SwitchStmt", "children": [
+              {"name": "NameExpr", "children": [
+                {"name": "SimpleName"}
+              ]}, 
+              {"name": "SwitchEntryStmt", "children": [
+                {"name": "UnaryExpr", "children": [
+                  {"name": "IntegerLiteralExpr"}
+                ]}, 
+                {"name": "ReturnStmt", "children": [
+                  {"name": "UnaryExpr", "children": [
+                    {"name": "IntegerLiteralExpr"}
+                  ]}
+                ]}
+              ]}, 
+              {"name": "SwitchEntryStmt", "children": [
+                {"name": "CharLiteralExpr"}, 
+                {"name": "ExpressionStmt", "children": [
+                  {"name": "AssignExpr", "children": [
+                    {"name": "ArrayAccessExpr", "children": [
+                      {"name": "NameExpr", "children": [
+                        {"name": "SimpleName"}
+                      ]}, 
+                      {"name": "BinaryExpr", "children": [
+                        {"name": "NameExpr", "children": [
+                          {"name": "SimpleName"}
+                        ]}, 
+                        {"name": "NameExpr", "children": [
+                          {"name": "SimpleName"}
+                        ]}
+                      ]}
+                    ]}, 
+                    {"name": "CastExpr", "children": [
+                      {"name": "PrimitiveType"}, 
+                      {"name": "EnclosedExpr", "children": [
+                        {"name": "BinaryExpr", "children": [
+                          {"name": "NameExpr", "children": [
+                            {"name": "SimpleName"}
+                          ]}, 
+                          {"name": "IntegerLiteralExpr"}
+                        ]}
+                      ]}
+                    ]}
+                  ]}
+                ]}, 
+                {"name": "ExpressionStmt", "children": [
+                  {"name": "UnaryExpr", "children": [
+                    {"name": "NameExpr", "children": [
+                      {"name": "SimpleName"}
+                    ]}
+                  ]}
+                ]}, 
+                {"name": "ReturnStmt", "children": [
+                  {"name": "NameExpr", "children": [
+                    {"name": "SimpleName"}
+                  ]}
+                ]}, 
+                {"name": "LineComment"}, 
+                {"name": "LineComment"}
+              ]}, 
+              {"name": "SwitchEntryStmt", "children": [
+                {"name": "ExpressionStmt", "children": [
+                  {"name": "AssignExpr", "children": [
+                    {"name": "ArrayAccessExpr", "children": [
+                      {"name": "NameExpr", "children": [
+                        {"name": "SimpleName"}
+                      ]}, 
+                      {"name": "BinaryExpr", "children": [
+                        {"name": "NameExpr", "children": [
+                          {"name": "SimpleName"}
+                        ]}, 
+                        {"name": "NameExpr", "children": [
+                          {"name": "SimpleName"}
+                        ]}
+                      ]}
+                    ]}, 
+                    {"name": "CastExpr", "children": [
+                      {"name": "PrimitiveType"}, 
+                      {"name": "EnclosedExpr", "children": [
+                        {"name": "BinaryExpr", "children": [
+                          {"name": "NameExpr", "children": [
+                            {"name": "SimpleName"}
+                          ]}, 
+                          {"name": "IntegerLiteralExpr"}
+                        ]}
+                      ]}
+                    ]}
+                  ]}
+                ]}, 
+                {"name": "ExpressionStmt", "children": [
+                  {"name": "UnaryExpr", "children": [
+                    {"name": "NameExpr", "children": [
+                      {"name": "SimpleName"}
+                    ]}
+                  ]}
+                ]}
+              ]}
+            ]}
+          ]}
+        ]}, 
+        {"name": "ReturnStmt", "children": [
+          {"name": "NameExpr", "children": [
+            {"name": "SimpleName"}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "ConstructorDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ExpressionStmt", "children": [
+          {"name": "AssignExpr", "children": [
+            {"name": "FieldAccessExpr", "children": [
+              {"name": "ThisExpr"}, 
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "ClassOrInterfaceType", "children": [
+      {"name": "SimpleName"}
+    ]}
+  ]}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "JavadocComment"}
+]}

@@ -1,0 +1,185 @@
+{"name": "CompilationUnit", "children": [
+  {"name": "PackageDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name"}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ClassOrInterfaceDeclaration", "children": [
+    {"name": "SimpleName"}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "ArrayType", "children": [
+          {"name": "ClassOrInterfaceType", "children": [
+            {"name": "SimpleName"}
+          ]}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}
+    ]}, 
+    {"name": "ConstructorDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ExpressionStmt", "children": [
+          {"name": "AssignExpr", "children": [
+            {"name": "FieldAccessExpr", "children": [
+              {"name": "ThisExpr"}, 
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "ArrayCreationExpr", "children": [
+              {"name": "ClassOrInterfaceType", "children": [
+                {"name": "SimpleName"}
+              ]}, 
+              {"name": "ArrayCreationLevel", "children": [
+                {"name": "IntegerLiteralExpr"}
+              ]}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "ConstructorDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ExpressionStmt", "children": [
+          {"name": "AssignExpr", "children": [
+            {"name": "FieldAccessExpr", "children": [
+              {"name": "ThisExpr"}, 
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "ArrayCreationExpr", "children": [
+              {"name": "ClassOrInterfaceType", "children": [
+                {"name": "SimpleName"}
+              ]}, 
+              {"name": "ArrayCreationLevel", "children": [
+                {"name": "IntegerLiteralExpr"}
+              ]}
+            ]}
+          ]}
+        ]}, 
+        {"name": "ForStmt", "children": [
+          {"name": "VariableDeclarationExpr", "children": [
+            {"name": "VariableDeclarator", "children": [
+              {"name": "PrimitiveType"}, 
+              {"name": "SimpleName"}, 
+              {"name": "IntegerLiteralExpr"}
+            ]}
+          ]}, 
+          {"name": "BinaryExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "IntegerLiteralExpr"}
+          ]}, 
+          {"name": "UnaryExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}
+          ]}, 
+          {"name": "ExpressionStmt", "children": [
+            {"name": "AssignExpr", "children": [
+              {"name": "ArrayAccessExpr", "children": [
+                {"name": "FieldAccessExpr", "children": [
+                  {"name": "ThisExpr"}, 
+                  {"name": "SimpleName"}
+                ]}, 
+                {"name": "NameExpr", "children": [
+                  {"name": "SimpleName"}
+                ]}
+              ]}, 
+              {"name": "ArrayAccessExpr", "children": [
+                {"name": "FieldAccessExpr", "children": [
+                  {"name": "NameExpr", "children": [
+                    {"name": "SimpleName"}
+                  ]}, 
+                  {"name": "SimpleName"}
+                ]}, 
+                {"name": "NameExpr", "children": [
+                  {"name": "SimpleName"}
+                ]}
+              ]}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ReturnStmt", "children": [
+          {"name": "ArrayAccessExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "CastExpr", "children": [
+              {"name": "PrimitiveType"}, 
+              {"name": "NameExpr", "children": [
+                {"name": "SimpleName"}
+              ]}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ExpressionStmt", "children": [
+          {"name": "AssignExpr", "children": [
+            {"name": "ArrayAccessExpr", "children": [
+              {"name": "NameExpr", "children": [
+                {"name": "SimpleName"}
+              ]}, 
+              {"name": "CastExpr", "children": [
+                {"name": "PrimitiveType"}, 
+                {"name": "NameExpr", "children": [
+                  {"name": "SimpleName"}
+                ]}
+              ]}
+            ]}, 
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}
+          ]}
+        ]}, 
+        {"name": "ReturnStmt", "children": [
+          {"name": "NameExpr", "children": [
+            {"name": "SimpleName"}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "ClassOrInterfaceType", "children": [
+      {"name": "SimpleName"}
+    ]}
+  ]}
+]}
