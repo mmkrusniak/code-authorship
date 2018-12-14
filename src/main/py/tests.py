@@ -20,6 +20,17 @@ def count(parse, counts):
 
     return
 
+def get_depth(parse, current_depth):
+    max_depth = current_depth
+    if "children" in parse:
+        children = parse["children"]
+        for child in children:
+            test_depth = get_depth(child, current_depth + 1)
+            if test_depth > max_depth:
+                max_depth = test_depth
+                 
+    return max_depth
+
 def trim(vec):
     to_remove = []
     for tup in vec:
@@ -32,7 +43,7 @@ def trim(vec):
 countsCollection = []
 base_labels = []
 
-data_labels = ("camera","kr","mk")
+data_labels = ("camera","kr","mk", "play", "turtle")
 
 for label in data_labels:
     data_dir = (".."+os.sep)*3+"out"+os.sep+label
@@ -42,6 +53,7 @@ for label in data_labels:
             parse = json.load(parseFile)
             counts = {}
             count(parse, counts)
+            counts["depth"] = get_depth(parse, 1)
             countsCollection.append(counts)
             base_labels.append(label)
 
