@@ -20,6 +20,31 @@ def count(parse, counts):
 
     return
 
+
+
+
+def count_bitrees(parse, counts):
+    result = []
+    if "children" not in parse: return
+    for c in parse["children"]:
+        key = parse["name"] + "+" + c["name"]
+        if key not in counts: counts[key] = 0
+        counts[key] += 1
+        count_bitrees(c, counts)
+
+def count_tritrees(parse, counts):
+    result = []
+    if "children" not in parse: return
+    for c in parse["children"]:
+        if "children" not in c: continue
+        for g in c["children"]: 
+            key = parse["name"] + "+" + c["name"] + "+" + g["name"]
+            if key not in counts: counts[key] = 0
+            counts[key] += 1
+            count_tritrees(g, counts)
+
+
+
 def trim(vec):
     to_remove = []
     for tup in vec:
@@ -32,7 +57,7 @@ def trim(vec):
 countsCollection = []
 base_labels = []
 
-data_labels = ("camera","kr","mk","turtle","play")
+data_labels = ("camera","kr","mk","play","turtle")
 
 for label in data_labels:
     data_dir = (".."+os.sep)*3+"out"+os.sep+label
@@ -42,6 +67,8 @@ for label in data_labels:
             parse = json.load(parseFile)
             counts = {}
             count(parse, counts)
+            count_bitrees(parse, counts)
+            # count_tritrees(parse, counts) no good
             countsCollection.append(counts)
             base_labels.append(label)
 
@@ -91,15 +118,15 @@ for i in range(0,len(base_corpus)):
             max_index = int(index)
 
     #print "index is: " + str(max_index)
-    #print "similarity is: " + str(max_similarity)
-    print "predicted label is: " + str(labels[int(max_index)])
-    print "actual label is: " + str(label)
+    # print "similarity is: " + str(max_similarity)
+    # print "predicted label is: " + str(labels[int(max_index)])
+    # print "actual label is: " + str(label)
     #print list(enumerate(sims))
     if str(labels[int(max_index)]) == str(label):
-        print "correct"
+        # print "correct"
         results.append(1)
     else:
-        print "incorrect"
+        # print "incorrect"
         results.append(0)
 
 accuracy = float(sum(results)) / len(results)
