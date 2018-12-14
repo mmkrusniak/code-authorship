@@ -120,18 +120,3 @@
   ]}, 
   {"name": "JavadocComment"}
 ]}
-            {"name": "ThisExpr"}, 
-              {"name": "SimpleName"}            ]}, 
-            {"name": "NameExpr"            , "children": [
-              {"name": "SimpleName"}            ]}          ]}        ]}      ]}    ]}  ]}, 
-  {"name": "JavadocComment"}]}
-: "NameExpr"            , "children": [
-              {"name": "SimpleName"              }            ]            }          ]          }        ]        }, 
-        {"name": "ExpressionStmt"        , "children": [
-          {"name": "AssignExpr"          , "children": [
-            {"name": "FieldAccessExpr"            , "children": [
-              {"name": "ThisExpr"              }, 
-              {"name": "SimpleName"              }            ]            }, 
-            {"name": "NameExpr"            , "children": [
-              {"name": "SimpleName"              }            ]            }          ]          }        ]        }      ]      }    ]    }  ]  }, 
-  {"name": "JavadocComment"  }]}

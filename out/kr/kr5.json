@@ -185,35 +185,3 @@
     ]}
   ]}
 ]}
-{"name": "Parameter"      , "children": [
-        {"name": "PrimitiveType"}, 
-        {"name": "SimpleName"}      ]}, 
-      {"name": "VoidType"}, 
-      {"name": "BlockStmt"      , "children": [
-        {"name": "ExpressionStmt"        , "children": [
-          {"name": "AssignExpr"          , "children": [
-            {"name": "NameExpr"            , "children": [
-              {"name": "SimpleName"}            ]}, 
-            {"name": "NameExpr"            , "children": [
-              {"name": "SimpleName"}            ]}          ]}        ]}      ]}    ]}  ]}]}
-me"            }          ]          }        ]        }      ]      }    ]    }, 
-    {"name": "MethodDeclaration"    , "children": [
-      {"name": "SimpleName"      }, 
-      {"name": "PrimitiveType"      }, 
-      {"name": "BlockStmt"      , "children": [
-        {"name": "ReturnStmt"        , "children": [
-          {"name": "NameExpr"          , "children": [
-            {"name": "SimpleName"            }          ]          }        ]        }      ]      }    ]    }, 
-    {"name": "MethodDeclaration"    , "children": [
-      {"name": "SimpleName"      }, 
-      {"name": "Parameter"      , "children": [
-        {"name": "PrimitiveType"        }, 
-        {"name": "SimpleName"        }      ]      }, 
-      {"name": "VoidType"      }, 
-      {"name": "BlockStmt"      , "children": [
-        {"name": "ExpressionStmt"        , "children": [
-          {"name": "AssignExpr"          , "children": [
-            {"name": "NameExpr"            , "children": [
-              {"name": "SimpleName"              }            ]            }, 
-            {"name": "NameExpr"            , "children": [
-              {"name": "SimpleName"              }            ]            }          ]          }        ]        }      ]      }    ]    }  ]  }]}
