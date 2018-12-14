@@ -4,6 +4,7 @@
 
 3) Counts of tritrees / appearances of single node, parent, and grandparent
 
+4) Max Depth
 
 
 This is what the trees will look like:

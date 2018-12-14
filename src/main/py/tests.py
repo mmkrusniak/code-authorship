@@ -32,7 +32,7 @@ def trim(vec):
 countsCollection = []
 base_labels = []
 
-data_labels = ("camera","kr","mk","turtle","play")
+data_labels = ("camera","kr","mk")
 
 for label in data_labels:
     data_dir = (".."+os.sep)*3+"out"+os.sep+label
@@ -55,11 +55,14 @@ types = set(sorted(types))
 base_corpus = []
 for counts in countsCollection:
     counts_vec = []
+    count_sum = 0
+    for type in counts:
+        count_sum+=counts[type]
     i = 0
     for type in types:
         count = 0
         if type in counts:
-            count = counts[type]
+            count = float(counts[type])/count_sum
 
         counts_vec.append((i,count))
         i+=1
