@@ -1,0 +1,60 @@
+{"name": "CompilationUnit", "children": [
+  {"name": "PackageDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name"}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "EnumDeclaration", "children": [
+    {"name": "SimpleName"}, 
+    {"name": "EnumDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "EnumConstantDeclaration", "children": [
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "EnumConstantDeclaration", "children": [
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "EnumConstantDeclaration", "children": [
+        {"name": "SimpleName"}
+      ]}
+    ]}, 
+    {"name": "EnumConstantDeclaration", "children": [
+      {"name": "SimpleName"}
+    ]}, 
+    {"name": "EnumConstantDeclaration", "children": [
+      {"name": "SimpleName"}
+    ]}, 
+    {"name": "EnumConstantDeclaration", "children": [
+      {"name": "SimpleName"}
+    ]}, 
+    {"name": "EnumConstantDeclaration", "children": [
+      {"name": "SimpleName"}
+    ]}, 
+    {"name": "EnumConstantDeclaration", "children": [
+      {"name": "SimpleName"}
+    ]}, 
+    {"name": "EnumConstantDeclaration", "children": [
+      {"name": "SimpleName"}
+    ]}
+  ]}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}
+]}

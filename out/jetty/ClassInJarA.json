@@ -1,0 +1,35 @@
+{"name": "CompilationUnit", "children": [
+  {"name": "PackageDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name"}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ClassOrInterfaceDeclaration", "children": [
+    {"name": "SimpleName"}, 
+    {"name": "FieldDeclaration", "children": [
+      {"name": "VariableDeclarator", "children": [
+        {"name": "PrimitiveType"}, 
+        {"name": "SimpleName"}, 
+        {"name": "BooleanLiteralExpr"}
+      ]}
+    ]}
+  ]}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}
+]}

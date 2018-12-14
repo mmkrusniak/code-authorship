@@ -1,0 +1,75 @@
+{"name": "CompilationUnit", "children": [
+  {"name": "PackageDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name", "children": [
+            {"name": "Name", "children": [
+              {"name": "Name"}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ClassOrInterfaceDeclaration", "children": [
+    {"name": "SimpleName"}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}, 
+        {"name": "WildcardType"}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "PrimitiveType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ReturnStmt", "children": [
+          {"name": "UnaryExpr", "children": [
+            {"name": "IntegerLiteralExpr"}
+          ]}
+        ]}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "PrimitiveType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "ReturnStmt", "children": [
+          {"name": "UnaryExpr", "children": [
+            {"name": "IntegerLiteralExpr"}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}
+]}

@@ -1,0 +1,62 @@
+{"name": "CompilationUnit", "children": [
+  {"name": "PackageDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name"}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ClassOrInterfaceDeclaration", "children": [
+    {"name": "SimpleName"}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "ClassOrInterfaceType", "children": [
+        {"name": "SimpleName"}
+      ]}
+    ]}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "ArrayType", "children": [
+        {"name": "PrimitiveType"}
+      ]}
+    ]}, 
+    {"name": "BlockComment"}
+  ]}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "LineComment"}, 
+  {"name": "BlockComment"}
+]}
