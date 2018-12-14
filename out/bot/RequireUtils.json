@@ -1,0 +1,72 @@
+{"name": "CompilationUnit", "children": [
+  {"name": "PackageDeclaration", "children": [
+    {"name": "Name", "children": [
+      {"name": "Name", "children": [
+        {"name": "Name", "children": [
+          {"name": "Name"}
+        ]}
+      ]}
+    ]}
+  ]}, 
+  {"name": "ClassOrInterfaceDeclaration", "children": [
+    {"name": "SimpleName"}, 
+    {"name": "MethodDeclaration", "children": [
+      {"name": "SimpleName"}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "Parameter", "children": [
+        {"name": "ClassOrInterfaceType", "children": [
+          {"name": "SimpleName"}
+        ]}, 
+        {"name": "SimpleName"}
+      ]}, 
+      {"name": "VoidType"}, 
+      {"name": "BlockStmt", "children": [
+        {"name": "IfStmt", "children": [
+          {"name": "BinaryExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "NullLiteralExpr"}
+          ]}, 
+          {"name": "BlockStmt", "children": [
+            {"name": "ThrowStmt", "children": [
+              {"name": "ObjectCreationExpr", "children": [
+                {"name": "ClassOrInterfaceType", "children": [
+                  {"name": "SimpleName"}
+                ]}, 
+                {"name": "NameExpr", "children": [
+                  {"name": "SimpleName"}
+                ]}
+              ]}
+            ]}
+          ]}
+        ]}, 
+        {"name": "IfStmt", "children": [
+          {"name": "MethodCallExpr", "children": [
+            {"name": "NameExpr", "children": [
+              {"name": "SimpleName"}
+            ]}, 
+            {"name": "SimpleName"}
+          ]}, 
+          {"name": "BlockStmt", "children": [
+            {"name": "ThrowStmt", "children": [
+              {"name": "ObjectCreationExpr", "children": [
+                {"name": "ClassOrInterfaceType", "children": [
+                  {"name": "SimpleName"}
+                ]}, 
+                {"name": "NameExpr", "children": [
+                  {"name": "SimpleName"}
+                ]}
+              ]}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}
+]}
