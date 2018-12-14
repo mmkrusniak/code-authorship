@@ -6,6 +6,9 @@
 
 4) Max Depth
 
+5) Also do things on raw source code?
+	- Use of curly braces, comments etc (see Krusl p239)
+
 
 This is what the trees will look like:
 
