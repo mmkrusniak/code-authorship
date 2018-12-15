@@ -5,7 +5,8 @@ import re
 import sys
 
 from gensim import corpora, models, similarities
-
+from sklearn.manifold import TSNE
+import matplotlib.pyplot as plt
 
 java_keywords = ("abstract", "continue", "for", "new", "switch", "assert", "default", "goto", 
     "package", "synchronized", "boolean", "do", "if", "private", "this", "break", "double", 
@@ -164,6 +165,12 @@ for counts in countsCollection:
         i+=1
 
     base_corpus.append(counts_vec)
+
+tsne = TSNE(n_components=2)
+flattened = tsne.fit_transform(base_corpus)
+
+plt.scatter(flattened[:, 0], flattened[:, 1])
+plt.show()
 
 for vec in base_corpus:
     trim(vec)
