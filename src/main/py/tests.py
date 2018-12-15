@@ -50,7 +50,6 @@ def count_tritrees(parse, counts):
             count_tritrees(g, counts)
 
 def count_style(file, counts):
-    pass
     style_markers = ("comments", "block_comments", "dangling_braces", "blank_lines", "spaced_braces", "oneline_ifs", "spaced_ops",
         "line_len", "num_lines", "var_len", "numbers")
     for i in style_markers: counts[i] = 0
@@ -78,8 +77,6 @@ def count_style(file, counts):
 
             for x in pure_line.split(" "):
                 if x not in java_keywords and x is not '': names.add(x)
-
-    if len(names) == 0: print file.name
 
     for name in names:
         counts["var_len"] += len(name)
@@ -112,8 +109,11 @@ def trim(vec):
 
 countsCollection = []
 base_labels = []
+num_files = {}
 
-data_labels = ("mk", "kr", "camera", "turtle", "jigsaw", "jetty")
+data_labels = ("bined", "camera", "play", "turtle", "mk", "bot", "kr")
+
+print "Loading features..."
 
 min_length = sys.maxint
 for label in data_labels:
@@ -124,20 +124,18 @@ for label in data_labels:
 for label in data_labels:
     data_dir = (".."+os.sep)*3+"out"+os.sep+label
     java_dir = (".."+os.sep)*3+"data"+os.sep+label
-    for i in range(0, min_length):
-#     for filename in os.listdir(data_dir):
-        filename = os.listdir(data_dir)[i]
-        #print filename
+    print "  for %s (%d files)" % (label, len(os.listdir(data_dir)))
+    for filename in os.listdir(data_dir):
         if label not in num_files: num_files[label] = 0
         num_files[label] += 1
         with open(data_dir + os.sep + filename) as parseFile:
             with open(java_dir + os.sep + (filename.replace(".json", ".java"))) as javaFile:
                 parse = json.load(parseFile)
                 counts = {}
-    #             count(parse, counts)
+                count(parse, counts)
                 count_bitrees(parse, counts)
                 count_style(javaFile, counts)
-                count_tritrees(parse, counts) 
+                # count_tritrees(parse, counts) 
                 counts["depth"] = get_depth(parse, 1)
                 countsCollection.append(counts)
                 base_labels.append(label)
@@ -175,30 +173,44 @@ plt.show()
 for vec in base_corpus:
     trim(vec)
 
-mistakes = {}
-results = []
+n = 10 # number of subsamples
+k = len(base_corpus)/n # number of elements per subsample
 
-print(base_labels)
-
-k = 10
-n = len(base_corpus)/k
-#print n
+print "Calculating similarities (%d-fold, %d per sample)..." % (n, k)
 
 accuracies = []
-for i in xrange(0, len(base_corpus), n):
-    test_vecs = base_corpus[i:i + n]
+fscores = []
+for i in xrange(0, n):
+    confusion_matrix = {}
+    for u in data_labels: 
+        confusion_matrix[u] = {}
+        for v in data_labels:
+            confusion_matrix[u][v] = 0
+
+    results = []
+    test_vecs = base_corpus[i:len(base_corpus):n]
     if len(test_vecs) < n:
-        print "skipping iteration " + str(float(i)/n) +".  Only " + str(len(test_vecs)) + " vectors remaining."
-        continue
-    #print len(test_vecs)
-    test_lables = base_labels[i:i + n]
-    #print len(test_lables)
-    corpus = list(base_corpus)
+        print "  stubbing iteration %d, only %d vectors remaining." % (i, len(test_vecs))
+        
+
+    test_labels = []
+    test_vecs = []
     labels = list(base_labels)
-    for vec in test_vecs:
-        corpus.remove(vec)
-    for label in test_lables:
-        labels.remove(label)
+    corpus = list(base_corpus)
+    for j in range(i, len(base_corpus), n):
+        test_labels += [base_labels[j]]
+        test_vecs += [base_corpus[j]]
+        labels[j] = None
+        corpus[j] = None
+
+    labels = [x for x in labels if x is not None]
+    corpus = [x for x in corpus if x is not None]
+
+    if len(labels) != len(corpus) or len(test_vecs) != len(test_labels): 
+        print "Warning: length error incoming"
+        print str(len(test_vecs)) + " elements in test_vecs: " + str(test_vecs)
+        print str(len(test_labels)) + " elements in test_labels: " + str(test_labels)
+
 
     tfidf = models.TfidfModel(corpus)
     index = similarities.SparseMatrixSimilarity(tfidf[corpus], num_features=len(types))
@@ -207,7 +219,7 @@ for i in xrange(0, len(base_corpus), n):
     for j in range(0, len(test_vecs)):
         #print str(float(j)/len(test_vecs) * 100) + "% through fold " +  str(float(i)/n)
         test_vec = test_vecs[j]
-        label = test_lables[j]
+        label = test_labels[j]
         sims = index[tfidf[test_vec]]
         max_index = 0
         max_similarity = 0
@@ -217,58 +229,84 @@ for i in xrange(0, len(base_corpus), n):
                 max_index = int(sim_index)
 
         if str(labels[int(max_index)]) == str(label):
-            #print "correct"
+            # print "correct"
             results.append(1)
+            confusion_matrix[label][label] += 1
+            # We don't really need to keep track of true negatives
         else:
-            #print "incorrect"
+            # print "incorrect"
             results.append(0)
-            if label not in mistakes: mistakes[label] = 0
-            mistakes[label] += 1
+            confusion_matrix[str(labels[int(max_index)])][label] += 1
+
 
     accuracy = float(sum(results)) / len(results)
     accuracies.append(accuracy)
-    print "accuracy " + str(float(i)/n) + " is: " + str(accuracy)
+    print "Accuracy %d is: %2.2f%%" % (i, accuracy*100)
     
-    for key in mistakes:
-        mistakes[key] = "%2.2f" % (100 - ((mistakes[key] * 100.0) / num_files[key])) + "%"
-    print mistakes
+    # Precision: truepos/pos
+    # Recall: truepos/(truepos+falseneg)
 
-avg_acc = sum(accuracies) / float(len(accuracies))
-print "average accuracy for " + str(k) + "-fold cross validation is: " + str(avg_acc)
+    recall = 0
+    precision = 0
+    used_labels = 0
 
-#results = []
-#for i in range(0,len(base_corpus)):
-#    corpus = list(base_corpus)
-#    labels = list(base_labels)
-#    test_vec = corpus[i]
-#    label = labels[i]
-#    #print test_vec
-#    corpus.remove(test_vec)
-#    labels.remove(label)
+    for label in data_labels:
+        truepos = confusion_matrix[label][label]
+        falsepos = sum([confusion_matrix[z][label] for z in data_labels if z != label])
+        falseneg = sum([confusion_matrix[label][z] for z in data_labels if z != label])
 
-#    tfidf = models.TfidfModel(corpus)
-#    index = similarities.SparseMatrixSimilarity(tfidf[corpus], num_features=len(types))
+        if truepos != 0: 
+            used_labels += 1
+            precision += truepos/float(truepos+falsepos)
+            recall    += truepos/float(truepos+falseneg)
 
-#    sims = index[tfidf[test_vec]]
-#    max_index = 0
-#    max_similarity = 0
-#    for (index, similarity) in list(enumerate(sims)):
-#        if float(similarity) > max_similarity:
-#            max_similarity = float(similarity)
-#            max_index = int(index)
+    precision /= used_labels
+    recall /= used_labels
+    fscore = 1.0/(.5/precision + .5/recall)
+    fscores += [fscore]
+
+    print "  Precision %d is: %2.2f%%" % (i, precision*100)
+    print "  Recall %d is: %2.2f%%" % (i, recall*100)
+    print "  F-score %d is: %2.2f%%" % (i, fscore*100)
 
 
-    #print "index is: " + str(max_index)
-    #print "similarity is: " + str(max_similarity)
-    #print "predicted label is: " + str(labels[int(max_index)])
-    #print "actual label is: " + str(label)
-    #print list(enumerate(sims))
-#    if str(labels[int(max_index)]) == str(label):
-#        print "correct"
-#        results.append(1)
-#    else:
-#        print "incorrect"
-#        results.append(0)
+print "------"
+print "Average accuracy for %d-fold cross validation is: %2.2f%%" % (n, sum(accuracies) / float(len(accuracies))*100)
+print "Average F-score for %d-fold cross validation is: %2.2f%%" % (n, sum(fscores) / float(len(fscores))*100)
 
-#accuracy = float(sum(results)) / len(results)
-#print "accuracy is: " + str(accuracy)
+# results = []
+# for i in range(0,len(base_corpus)):
+#     corpus = list(base_corpus)
+#     labels = list(base_labels)
+#     test_vec = corpus[i]
+#     label = labels[i]
+#     #print test_vec
+#     corpus.remove(test_vec)
+#     labels.remove(label)
+
+#     tfidf = models.TfidfModel(corpus)
+#     index = similarities.SparseMatrixSimilarity(tfidf[corpus], num_features=len(types))
+ 
+#     sims = index[tfidf[test_vec]]
+#     max_index = 0
+#     max_similarity = 0
+#     for (index, similarity) in list(enumerate(sims)):
+#         if float(similarity) > max_similarity:
+#             max_similarity = float(similarity)
+#             max_index = int(index)
+
+
+#     # print "index is: " + str(max_index)
+#     # print "similarity is: " + str(max_similarity)
+#     # print "predicted label is: " + str(labels[int(max_index)])
+#     # print "actual label is: " + str(label)
+#     # print list(enumerate(sims))
+#     if str(labels[int(max_index)]) == str(label):
+#         print "correct, was %s" % label
+#         results.append(1)
+#     else:
+#         print "incorrect, was %s, guessed %s" % (label, labels[int(max_index)])
+#         results.append(0)
+
+# accuracy = float(sum(results)) / len(results)
+# print "accuracy is: " + str(accuracy)
