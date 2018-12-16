@@ -110,7 +110,7 @@ countsCollection = []
 base_labels = []
 num_files = {}
 
-data_labels = ("bined", "camera", "play", "turtle", "mk", "bot", "kr")
+data_labels = ("mk", "kr")
 
 print "Loading features..."
 
@@ -132,9 +132,10 @@ for label in data_labels:
                 parse = json.load(parseFile)
                 counts = {}
                 count(parse, counts)
+                # if "ForeachStmt" in counts: del counts["ForeachStmt"]
                 count_bitrees(parse, counts)
                 count_style(javaFile, counts)
-                # count_tritrees(parse, counts) 
+                count_tritrees(parse, counts) 
                 counts["depth"] = get_depth(parse, 1)
                 countsCollection.append(counts)
                 base_labels.append(label)
@@ -166,7 +167,7 @@ for counts in countsCollection:
 for vec in base_corpus:
     trim(vec)
 
-n = 10 # number of subsamples
+n =  200# number of subsamples
 k = len(base_corpus)/n # number of elements per subsample
 
 print "Calculating similarities (%d-fold, %d per sample)..." % (n, k)
@@ -183,7 +184,7 @@ for i in xrange(0, n):
     results = []
     test_vecs = base_corpus[i:len(base_corpus):n]
     if len(test_vecs) < n:
-        print "  stubbing iteration %d, only %d vectors remaining." % (i, len(test_vecs))
+        print "  stubbed iteration %d, used only %d vectors." % (i, len(test_vecs))
         
 
     test_labels = []
@@ -198,12 +199,6 @@ for i in xrange(0, n):
 
     labels = [x for x in labels if x is not None]
     corpus = [x for x in corpus if x is not None]
-
-    if len(labels) != len(corpus) or len(test_vecs) != len(test_labels): 
-        print "Warning: length error incoming"
-        print str(len(test_vecs)) + " elements in test_vecs: " + str(test_vecs)
-        print str(len(test_labels)) + " elements in test_labels: " + str(test_labels)
-
 
     tfidf = models.TfidfModel(corpus)
     index = similarities.SparseMatrixSimilarity(tfidf[corpus], num_features=len(types))
@@ -231,35 +226,42 @@ for i in xrange(0, n):
             results.append(0)
             confusion_matrix[str(labels[int(max_index)])][label] += 1
 
+    if results != []:
+        accuracy = float(sum(results)) / len(results)
+        accuracies.append(accuracy)
 
-    accuracy = float(sum(results)) / len(results)
-    accuracies.append(accuracy)
-    print "Accuracy %d is: %2.2f%%" % (i, accuracy*100)
+    label_counts = {}
+    for b in data_labels: label_counts[b] = str(confusion_matrix[b][b]) + "/" + str(test_labels.count(b))
+    print "Tested group %d; accuracies " % i + str(label_counts)
+    print "  Accuracy %d is: %2.2f%%" % (i, accuracy*100)
     
     # Precision: truepos/pos
     # Recall: truepos/(truepos+falseneg)
 
     recall = 0
     precision = 0
+    fscore = 0
     used_labels = 0
 
-    for label in data_labels:
+    for label in set(test_labels):
         truepos = confusion_matrix[label][label]
         falsepos = sum([confusion_matrix[z][label] for z in data_labels if z != label])
         falseneg = sum([confusion_matrix[label][z] for z in data_labels if z != label])
+        used_labels += 1
 
         if truepos != 0: 
-            used_labels += 1
             precision += truepos/float(truepos+falsepos)
             recall    += truepos/float(truepos+falseneg)
 
-    precision /= used_labels
-    recall /= used_labels
-    fscore = 1.0/(.5/precision + .5/recall)
-    fscores += [fscore]
+    if precision == 0 or recall == 0: fscore = 0
+    else:   
+        precision /= used_labels
+        recall /= used_labels
+        fscore = 1.0/(.5/precision + .5/recall)
+        print "  Precision %d is: %2.2f%%" % (i, precision*100)
+        print "  Recall %d is: %2.2f%%" % (i, recall*100)
 
-    print "  Precision %d is: %2.2f%%" % (i, precision*100)
-    print "  Recall %d is: %2.2f%%" % (i, recall*100)
+    fscores += [fscore] 
     print "  F-score %d is: %2.2f%%" % (i, fscore*100)
 
 
