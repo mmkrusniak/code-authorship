@@ -7,6 +7,8 @@ import sys
 from gensim import corpora, models, similarities
 from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+import numpy as np
 
 java_keywords = ("abstract", "continue", "for", "new", "switch", "assert", "default", "goto", 
     "package", "synchronized", "boolean", "do", "if", "private", "this", "break", "double", 
@@ -107,11 +109,28 @@ def trim(vec):
     for tup in to_remove:
         vec.remove(tup)
 
+def untrim(vec, length):
+    out_vec = []
+    current_index = 0
+    for (index, val) in vec:
+        while index > current_index:
+            out_vec.append(0)
+            current_index+=1
+
+        out_vec.append(val)
+        current_index+=1
+        
+    while current_index < length:
+        out_vec.append(0)
+        current_index+=1
+
+    return out_vec
+
 countsCollection = []
 base_labels = []
 num_files = {}
 
-data_labels = ("bined", "camera", "play", "turtle", "mk", "bot", "kr")
+data_labels = ("mk", "kr", "camera", "bined", "turtle")
 
 print "Loading features..."
 
@@ -147,6 +166,8 @@ for counts in countsCollection:
 
 types = set(sorted(types))
 
+max_length = len(types)
+
 base_corpus = []
 for counts in countsCollection:
     counts_vec = []
@@ -164,14 +185,36 @@ for counts in countsCollection:
 
     base_corpus.append(counts_vec)
 
-tsne = TSNE(n_components=2)
-flattened = tsne.fit_transform(base_corpus)
-
-plt.scatter(flattened[:, 0], flattened[:, 1])
-plt.show()
-
 for vec in base_corpus:
     trim(vec)
+
+model = models.TfidfModel(base_corpus)
+vector = model[base_corpus[0]]
+modeled_vecs = [model[vec] for vec in base_corpus]
+untrimmed_vecs = [untrim(vec, max_length) for vec in modeled_vecs]
+
+tsne = TSNE(n_components=2, init='random')
+flattened = tsne.fit_transform(untrimmed_vecs)
+
+prev_label = base_labels[0]
+separated = []
+separated.append([])
+colors = cm.rainbow(np.linspace(0,1,len(data_labels)))
+for label, l in zip(base_labels, flattened):
+    if label != prev_label:
+        prev_label = label
+        separated.append([])
+
+    separated[len(separated) - 1].append(l)
+
+fig, ax = plt.subplots()
+for l, color, data_label in zip(separated, colors, data_labels):
+    x = [a[0] for a in l[:]]
+    y = [a[1] for a in l[:]]
+    ax.scatter(x, y, c = color, label=data_label, alpha = 0.3)
+
+ax.legend()
+plt.show()
 
 n = 10 # number of subsamples
 k = len(base_corpus)/n # number of elements per subsample
