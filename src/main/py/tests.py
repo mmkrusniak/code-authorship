@@ -130,7 +130,7 @@ countsCollection = []
 base_labels = []
 num_files = {}
 
-data_labels = ("mk", "kr", "camera", "bined", "turtle")
+data_labels = ("jetty","jigsaw")
 
 print "Loading features..."
 
