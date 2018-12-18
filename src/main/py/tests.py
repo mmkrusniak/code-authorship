@@ -1,15 +1,26 @@
-import json
-import os
-import collections
-import re
-import sys
+# Source code authorship analysis with SVM and syntax tree.
+# Clarence Rodgers, Miles Krusniak
+# Dr. Robert Frank, LING 227
 
+
+# Utilities for reading and interpreting JSON and Java files
+import json # json reader
+import os # file io
+import collections # general library
+import re # regular expressions for stylistic components
+import sys # also file io
+
+# GenSim, for SVM/TF-IDF
 from gensim import corpora, models, similarities
-from sklearn.manifold import TSNE
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm
-import numpy as np
 
+# Utilities for plot drawing
+from sklearn.manifold import TSNE # for vector flattening
+import matplotlib.pyplot as plt # for plot drawing
+import matplotlib.cm as cm # for plot drawing
+import numpy as np # for general math
+
+# A list of Java keywords (and the literals null, true, and false.)
+# Used in some stylistic features.
 java_keywords = ("abstract", "continue", "for", "new", "switch", "assert", "default", "goto", 
     "package", "synchronized", "boolean", "do", "if", "private", "this", "break", "double", 
     "implements", "protected", "throw", "byte", "else", "import", "public", "throws", "case", 
@@ -17,25 +28,44 @@ java_keywords = ("abstract", "continue", "for", "new", "switch", "assert", "defa
     "final", "interface", "static", "void", "class", "finally", "long", "strictfp", "volatile", 
     "const", "float", "native", "super", "while", "null", "true", "false")
 
-def count(parse, counts):
-    for key in parse:
-        if key == "name":
-            name = parse[key]
-            if name not in counts:
-                counts[name] = 0
 
-            counts[name]+=1
-        else:
-            children = parse[key]
-            for child in children:
-                count(child, counts)
+# Unigram structural feature.
+def count_nodes(parse, counts):
+    if "struct/unitree/" + parse["name"] not in counts: counts["struct/unitree/" + parse["name"]] = 0
+    counts["struct/unitree/" + parse["name"]] += 1
+
+    if "children" in parse: 
+        for c in parse["children"]:
+            count_nodes(c, counts)
     return
+
+def count_node_characteristics(parse, counts, depth=0):
+    result = []
+    if "struct/nchild/"+parse["name"] not in counts: counts["struct/nchild/"+parse["name"]] = 0
+    if "struct/max_depth" not in counts: counts["struct/max_depth"] = []
+
+
+    if "children" in parse: counts["struct/nchild/"+parse["name"]] += len(parse["children"])
+    counts["struct/max_depth"] += [depth]
+
+    if "children" in parse: 
+        for c in parse["children"]:
+            count_node_characteristics(c, counts, depth+1)
+
+    # Processing once the recursive part is done
+    if parse["name"] == "CompilationUnit":
+        counts["struct/max_depth"] = max(counts["struct/max_depth"])
+        for n in counts:
+            if n.startswith("struct/nchild/"):
+                v = n.replace("struct/nchild/", "")
+                counts["struct/nchild/"+v] /= counts["struct/unitree/"+v]
+
 
 def count_bitrees(parse, counts):
     result = []
     if "children" not in parse: return
     for c in parse["children"]:
-        key = parse["name"] + "+" + c["name"]
+        key = "struct/bitree/" + parse["name"] + "+" + c["name"]
         if key not in counts: counts[key] = 0
         counts[key] += 1
         count_bitrees(c, counts)
@@ -46,45 +76,52 @@ def count_tritrees(parse, counts):
     for c in parse["children"]:
         if "children" not in c: continue
         for g in c["children"]: 
-            key = parse["name"] + "+" + c["name"] + "+" + g["name"]
+            key = "struct/tritree/" + parse["name"] + "+" + c["name"] + "+" + g["name"]
             if key not in counts: counts[key] = 0
             counts[key] += 1
             count_tritrees(g, counts)
 
 def count_style(file, counts):
-    style_markers = ("comments", "block_comments", "dangling_braces", "blank_lines", "spaced_braces", "oneline_ifs", "spaced_ops",
-        "line_len", "num_lines", "var_len", "numbers")
-    for i in style_markers: counts[i] = 0
-    block = False
+    single_style_markers = ("comments", "blocks", "d_braces", "blanks", "s_braces", "one_ifs", "opspace",
+        "line_len", "num_lines", "var_len")
+    # These aren't all the style markers; they're just the ones that aren't done in bulk
+    for i in single_style_markers: counts["style/"+i] = 0
+
+    block = False # We need to keep track whether we're in a block comment (so we don't accidentally 
+    # measure stats about content that isn't part of the program)
     names = set([])
 
     for line in file:
         if "/*" in line: 
-            counts["block_comments"] += 1
+            counts["style/blocks"] += 1
             block = True
         if "*/" in line: block = False
 
         if not block:
             pure_line = re.sub(r" [0-9]+\w?", "", re.sub(r"\W", " ", re.sub(r"//.*", "",line)))
 
-            if "//" in line: counts["comments"] += 1
-            if line.strip() == '{': counts["dangling_braces"] += 1
-            if line.strip() == '': counts["blank_lines"] += 1
-            if " {" in line: counts["spaced_braces"] += 1 # Bing et. al. STY1b
-            if re.search(r"if ?\(.+\) ?\S+", line): counts["oneline_ifs"] += 1
-            if re.search(r" [\+\-\*/%=]=? ", line): counts["spaced_ops"] += 1
-            counts["numbers"] += len(re.findall(r"\W[0-9]+\w?", line))
-            counts["num_lines"] += 1
-            counts["line_len"] += len(line)
+            if "//" in line: counts["style/comments"] += 1
+            if line.strip() == '{': counts["style/d_braces"] += 1
+            if line.strip() == '': counts["style/blanks"] += 1
+            if " {" in line: counts["style/s_braces"] += 1 # Bing et. al. STY1b
+            if re.search(r"if ?\(.+\) ?\S+", line): counts["style/one_ifs"] += 1
+            if re.search(r" [\+\-\*/%=]=? ", line): counts["style/opspace"] += 1
+            counts["style/num_lines"] += 1
+            counts["style/line_len"] += len(line)
 
             for x in pure_line.split(" "):
                 if x not in java_keywords and x is not '': names.add(x)
 
-    for name in names:
-        counts["var_len"] += len(name)
-    counts["var_len"] /= len(names)
+            for word in java_keywords:
+                if word in line: 
+                    if "style/keyword/"+word not in counts: counts["style/keyword/"+word] = 0
+                    counts["style/keyword/"+word] += 1
 
-    counts["line_len"] /= counts["num_lines"]
+    for name in names:
+        counts["style/var_len"] += len(name)
+    counts["style/var_len"] /= len(names)
+
+    counts["style/line_len"] /= counts["style/num_lines"]
 
 
 
@@ -130,7 +167,9 @@ countsCollection = []
 base_labels = []
 num_files = {}
 
-data_labels = ("mk", "kr", "camera", "bined", "turtle")
+data_labels = ("play", "bot", "turtle", "bined", "camera")
+filenames = {}
+for label in data_labels: filenames[label] = []
 
 print "Loading features..."
 
@@ -145,18 +184,19 @@ for label in data_labels:
     java_dir = (".."+os.sep)*3+"data"+os.sep+label
     print "  for %s (%d files)" % (label, len(os.listdir(data_dir)))
     for filename in os.listdir(data_dir):
+        filenames[label] += [label + "/" + filename.replace(".json", ".java")]
         if label not in num_files: num_files[label] = 0
         num_files[label] += 1
         with open(data_dir + os.sep + filename) as parseFile:
             with open(java_dir + os.sep + (filename.replace(".json", ".java"))) as javaFile:
                 parse = json.load(parseFile)
                 counts = {}
-                count(parse, counts)
-                # if "ForeachStmt" in counts: del counts["ForeachStmt"]
+                count_nodes(parse, counts)
                 count_bitrees(parse, counts)
-                count_style(javaFile, counts)
                 count_tritrees(parse, counts) 
+                count_node_characteristics(parse, counts)
                 counts["depth"] = get_depth(parse, 1)
+                count_style(javaFile, counts)
                 countsCollection.append(counts)
                 base_labels.append(label)
 
@@ -168,6 +208,8 @@ for counts in countsCollection:
 types = set(sorted(types))
 
 max_length = len(types)
+
+print "  %d features found." % max_length
 
 base_corpus = []
 for counts in countsCollection:
@@ -209,13 +251,21 @@ for label, l in zip(base_labels, flattened):
     separated[len(separated) - 1].append(l)
 
 fig, ax = plt.subplots()
+
+
 for l, color, data_label in zip(separated, colors, data_labels):
     x = [a[0] for a in l[:]]
     y = [a[1] for a in l[:]]
-    ax.scatter(x, y, c = color, label=data_label, alpha = 0.3)
+    col = ax.scatter(x, y, c = color, label=data_label, alpha = 0.3)
+    
+    # Sometimes it's nice to be able to locate files, so here's that:
+    # for name, location in zip(filenames[data_label], l):
+    #     print " File %s is at %2.0f, %2.0f" % (name, location[0], location[1])
 
 ax.legend()
-plt.show()
+# plt.show()
+
+
 
 n = 10 # number of subsamples
 k = len(base_corpus)/n # number of elements per subsample
@@ -233,6 +283,7 @@ for i in xrange(0, n):
 
     results = []
     test_vecs = base_corpus[i:len(base_corpus):n]
+    if test_vecs == []: continue
     if len(test_vecs) < n:
         print "  stubbed iteration %d, used only %d vectors." % (i, len(test_vecs))
         
@@ -249,6 +300,7 @@ for i in xrange(0, n):
 
     labels = [x for x in labels if x is not None]
     corpus = [x for x in corpus if x is not None]
+
 
     tfidf = models.TfidfModel(corpus)
     index = similarities.SparseMatrixSimilarity(tfidf[corpus], num_features=len(types))
@@ -300,58 +352,26 @@ for i in xrange(0, n):
         used_labels += 1
 
         if truepos != 0: 
+            if precision == None: precision = 0
+            if recall == None: recall = 0
             precision += truepos/float(truepos+falsepos)
             recall    += truepos/float(truepos+falseneg)
 
-    if precision == 0 or recall == 0: fscore = 0
-    else:   
-        precision /= used_labels
-        recall /= used_labels
-        fscore = 1.0/(.5/precision + .5/recall)
-        print "  Precision %d is: %2.2f%%" % (i, precision*100)
-        print "  Recall %d is: %2.2f%%" % (i, recall*100)
+    if used_labels != 0:
+        if precision == 0 or recall == 0: 
+            fscore = 0
+            fscores += [0]
+        else:
+            precision /= used_labels
+            recall /= used_labels
+            fscore = 1.0/(.5/precision + .5/recall)
+            print "  Precision %d is: %2.2f%%" % (i, precision*100)
+            print "  Recall %d is: %2.2f%%" % (i, recall*100)
+            fscores += [fscore]
 
-    fscores += [fscore] 
-    print "  F-score %d is: %2.2f%%" % (i, fscore*100)
+        print "  F-score %d is: %2.2f%%" % (i, fscore*100 if fscore is not None else -1)
 
 
 print "------"
 print "Average accuracy for %d-fold cross validation is: %2.2f%%" % (n, sum(accuracies) / float(len(accuracies))*100)
 print "Average F-score for %d-fold cross validation is: %2.2f%%" % (n, sum(fscores) / float(len(fscores))*100)
-
-# results = []
-# for i in range(0,len(base_corpus)):
-#     corpus = list(base_corpus)
-#     labels = list(base_labels)
-#     test_vec = corpus[i]
-#     label = labels[i]
-#     #print test_vec
-#     corpus.remove(test_vec)
-#     labels.remove(label)
-
-#     tfidf = models.TfidfModel(corpus)
-#     index = similarities.SparseMatrixSimilarity(tfidf[corpus], num_features=len(types))
- 
-#     sims = index[tfidf[test_vec]]
-#     max_index = 0
-#     max_similarity = 0
-#     for (index, similarity) in list(enumerate(sims)):
-#         if float(similarity) > max_similarity:
-#             max_similarity = float(similarity)
-#             max_index = int(index)
-
-
-#     # print "index is: " + str(max_index)
-#     # print "similarity is: " + str(max_similarity)
-#     # print "predicted label is: " + str(labels[int(max_index)])
-#     # print "actual label is: " + str(label)
-#     # print list(enumerate(sims))
-#     if str(labels[int(max_index)]) == str(label):
-#         print "correct, was %s" % label
-#         results.append(1)
-#     else:
-#         print "incorrect, was %s, guessed %s" % (label, labels[int(max_index)])
-#         results.append(0)
-
-# accuracy = float(sum(results)) / len(results)
-# print "accuracy is: " + str(accuracy)

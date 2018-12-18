@@ -1,3 +1,68 @@
 For set of 26 features: http://aut.researchgateway.ac.nz/bitstream/handle/10292/2837/MacDonell%20and%20Gray%20%282001%29%20JSRIS.pdf?sequence=2&isAllowed=y
 
 Java features: https://www.sciencedirect.com/science/article/pii/S0164121203000499
+
+
+STY1  A list of metrics indicating indentation style
+ STY1a  Percentage of open braces ({) that are along a line
+ STY1b  Percentage of open braces ({) that are the first character in a line
+ STY1c  Percentage of open braces ({) that are the last character in a line
+ STY1d  Percentage of close braces (}) that are along a line
+ STY1e  Percentage of close braces (}) that are the first character in a line
+ STY1f  Percentage of close braces (}) that are the last character in a line
+ STY1g  Average indentation in white spaces after open braces ({)
+ STY1h  Average indentation in tabs after open braces ({)
+STY2  A vector of metrics specifying comment style
+ STY2a  Percentages of pure comment lines among lines containing comments
+ STY2b  Percentages of “//” style comments among “//” and “/*” style comments
+STY3  Percentages of condition lines where the statements are on the same line as the condition
+STY4  Average white spaces to the left side of operatorsa
+STY5  Average white spaces to the right side of operatorsa
+STY6  Ratio of blank lines to code lines (including comment lines)
+STY7  Ratio of comment lines to non-comment linesb
+STY8  Ratio of code lines containing comment to code lines without any comments
+PRO1  Mean program line length in terms of characters
+PRO2  A vector of metrics of name lengths
+ PRO2a  Mean variable name lengtha
+ PRO2b  Mean function name length
+PRO3  Character preference of uppercase, lowercase, underscore, or dollar sign for name convention
+ PRO3a  Percentage of uppercase characters
+ PRO3b  Percentage of lowercase characters
+ PRO3c  Percentage of underscores
+ PRO3d  Percentage of dollar signs
+PRO4  Preference of either “while”, “for”, or “do” loops
+ PRO4a  Percentage of “while” in total of “while”, “for”, and “do”
+ PRO4b  Percentage of “for” in total of “while”, “for”, and “do”
+ PRO4c  Percentage of “do” in total of “while”, “for”, and “do”
+PRO5  Preference of either “if-else” or “switch-case” conditions
+ PRO5a  Percentage of “if” and “else” in total of “if”, “else”, “switch”, and “case”
+ PRO5b  Percentage of “switch” and “case” in total of “if”, “else”, “switch”, and “case”
+ PRO5c  Percentage of “if” in total of “if” and “else”
+ PRO5d  Percentage of “switch” in total of “switch” and “case”
+PSM1  Average non-comment lines per class/interface
+PSM2  Average number of primitive variables per class/interface
+PSM3  Average number of functions per class/interface
+PSM4  Ratio of interfaces to classes
+PSM5  Ratio of primitive variable count to lines of non-comment code
+PSM6  Ratio of function count to lines of non-comment code
+PSM7  A list of ratios of keywords to lines of non-comment code
+ PSM7a  Ratio of keyword “static” to lines of non-comment code
+ PSM7b  Ratio of keyword “extends” to lines of non-comment code
+ PSM7c  Ratio of keyword “class” to lines of non-comment code
+ PSM7d  Ratio of keyword “abstract” to lines of non-comment code
+ PSM7e  Ratio of keyword “implements” to lines of non-comment code
+ PSM7f  Ratio of keyword “import” to lines of non-comment code
+ PSM7g  Ratio of keyword “instanceof” to lines of non-comment code
+ PSM7h  Ratio of keyword “interface” to lines of non-comment code
+ PSM7i  Ratio of keyword “native” to lines of non-comment code
+ PSM7j  Ratio of keyword “new” to lines of non-comment code
+ PSM7k  Ratio of keyword “package” to lines of non-comment code
+ PSM7l  Ratio of keyword “private” to lines of non-comment code
+ PSM7m  Ratio of keyword “public” to lines of non-comment code
+ PSM7n  Ratio of keyword “protected” to lines of non-comment code
+ PSM7o  Ratio of keyword “this” to lines of non-comment code
+ PSM7p  Ratio of keyword “super” to lines of non-comment code
+ PSM7q  Ratio of keyword “try” to lines of non-comment code
+ PSM7r  Ratio of keyword “throw” to lines of non-comment code
+ PSM7s  Ratio of keyword “catch” to lines of non-comment code
+ PSM7t  Ratio of keyword “final” to lines of non-comment code
