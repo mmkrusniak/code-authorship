@@ -10,12 +10,13 @@ import collections # general library
 import re # regular expressions for stylistic components
 import sys # also file io
 
-# GenSim, for SVM/TF-IDF
+# GenSim and scikit-learn, for the actual models, plus random for the base model
 from gensim import corpora, models, similarities
 import gensim
 from sklearn.svm import *
 from sklearn.multiclass import *
 from sklearn.preprocessing import LabelEncoder
+import random
 
 
 # Utilities for plot drawing
@@ -34,7 +35,11 @@ java_keywords = ("abstract", "continue", "for", "new", "switch", "assert", "defa
     "const", "float", "native", "super", "while", "null", "true", "false")
 
 
-# Unigram structural feature.
+# Generally how this program is structured: 
+# Various methods run through a parse tree or file and search for certain characteristics.
+# Those characteristics are added to a dictionary, which is then processed into a document vector.
+
+# Unigram structural feature. It's recursive.
 def count_nodes(parse, counts):
     if "struct/unitree/" + parse["name"] not in counts: counts["struct/unitree/" + parse["name"]] = 0
     counts["struct/unitree/" + parse["name"]] += 1
@@ -44,6 +49,7 @@ def count_nodes(parse, counts):
             count_nodes(c, counts)
     return
 
+# General method to count structural features that aren't ngrams. 
 def count_node_characteristics(parse, counts, depth=0):
     result = []
     if "struct/nchild/"+parse["name"] not in counts: counts["struct/nchild/"+parse["name"]] = 0
@@ -65,7 +71,7 @@ def count_node_characteristics(parse, counts, depth=0):
                 v = n.replace("struct/nchild/", "")
                 counts["struct/nchild/"+v] /= counts["struct/unitree/"+v]
 
-
+# Bigram counts.
 def count_bitrees(parse, counts):
     result = []
     if "children" not in parse: return
@@ -75,6 +81,7 @@ def count_bitrees(parse, counts):
         counts[key] += 1
         count_bitrees(c, counts)
 
+# Trigram counts/
 def count_tritrees(parse, counts):
     result = []
     if "children" not in parse: return
@@ -86,6 +93,8 @@ def count_tritrees(parse, counts):
             counts[key] += 1
             count_tritrees(g, counts)
 
+
+# Style counts. Basically, iterate through each line of the program and look for verbatim characteristics.
 def count_style(file, counts):
     single_style_markers = ("comments", "blocks", "d_braces", "blanks", "s_braces", "one_ifs", "opspace",
         "line_len", "num_lines", "var_len")
@@ -105,23 +114,35 @@ def count_style(file, counts):
         if not block:
             pure_line = re.sub(r" [0-9]+\w?", "", re.sub(r"\W", " ", re.sub(r"//.*", "",line)))
 
+            # These first two are very useful indicators, but not present in many classes.
+            # We didn't use them because our training data had them (so it outshined the information
+            # we really wanted about structural characteristics.)
+
+            # if line.strip() == '{': counts["style/d_braces"] += 1
+            # if " {" in line: counts["style/s_braces"] += 1 # Bing et. al. STY1b.
+
+
             if "//" in line: counts["style/comments"] += 1
-            if line.strip() == '{': counts["style/d_braces"] += 1
             if line.strip() == '': counts["style/blanks"] += 1
-            if " {" in line: counts["style/s_braces"] += 1 # Bing et. al. STY1b
             if re.search(r"if ?\(.+\) ?\S+", line): counts["style/one_ifs"] += 1
             if re.search(r" [\+\-\*/%=]=? ", line): counts["style/opspace"] += 1
             counts["style/num_lines"] += 1
             counts["style/line_len"] += len(line)
 
+            # We keep track of names, though not as features
             for x in pure_line.split(" "):
                 if x not in java_keywords and x is not '': names.add(x)
 
+            # We keep track of keywords too, and yes as features.
+            # (Not all keywords correspond exactly to structures - most don't -
+            # so this is not redundant with unigrams)
             for word in java_keywords:
                 if word in line: 
                     if "style/keyword/"+word not in counts: counts["style/keyword/"+word] = 0
                     counts["style/keyword/"+word] += 1
 
+    # We don't want to keep track of specific variable names (which are project dependent),
+    # but it's acceptable to keep track of name characteristics like average length.
     for name in names:
         counts["style/var_len"] += len(name)
     counts["style/var_len"] /= len(names)
@@ -129,19 +150,7 @@ def count_style(file, counts):
     counts["style/line_len"] /= counts["style/num_lines"]
 
 
-
-
-def get_depth(parse, current_depth):
-    max_depth = current_depth
-    if "children" in parse:
-        children = parse["children"]
-        for child in children:
-            test_depth = get_depth(child, current_depth + 1)
-            if test_depth > max_depth:
-                max_depth = test_depth
-                 
-    return max_depth
-
+# Vector processing methods to add and remove vectors with zero counts.
 def trim(vec):
     result = []
     for tup in vec:
@@ -149,8 +158,6 @@ def trim(vec):
             result.append(tup)
 
     return result
-
-
 def untrim(vec, length):
     out_vec = []
     current_index = 0
@@ -168,30 +175,43 @@ def untrim(vec, length):
 
     return out_vec
 
-MODE = "SVM" # "MAXSIM" or "SVM"
+
+# "MAXSIM" or "SVM" or "TSNE" or "BASE"
+MODE = sys.argv[1].upper()
 
 
-# Average accuracy for 10-fold cross validation is: 97.85%
-# Average F-score for 10-fold cross validation is: 97.86%
+# style or struc or all
+if sys.argv[2] == "all": features = ("style", "struc") 
+else: features = (sys.argv[2],)
 
+max_num_files = int(sys.argv[3])
+n = int(sys.argv[4])
+
+data_labels = sys.argv[5:]
+
+if MODE not in ("MAXSIM", "SVM", "TSNE", "BASE"):
+    print 'Error: Invalid mode. Valid modes are "MAXSIM", "SVM", "TSNE", and "BASE".'
+    exit()
+
+
+print "Running %s analysis with features "%MODE + str(features)
+print "%d files to be loaded, into %d categories" % (max_num_files, n)
+print "Using categories " + str(data_labels)
+print "--------------------------"
+
+# Initialize a lot of things
+filenames = {}
 countsCollection = []
 base_labels = []
 num_files = {}
-max_num_files = 18
-
-data_labels = ("mk", "kr")
-filenames = {}
 for label in data_labels: filenames[label] = []
+random.seed(42) # To get consistent-ish results from the wild guess model
 
 print "Loading features..."
 
-min_length = sys.maxint
+# Load the features for every label.
 for label in data_labels:
-    data_dir = (".."+os.sep)*3+"out"+os.sep+label
-    if min_length > len(os.listdir(data_dir)):
-        min_length = len(os.listdir(data_dir))
-
-for label in data_labels:
+    # We need both the JSON files and the Java files.
     data_dir = (".."+os.sep)*3+"out"+os.sep+label
     java_dir = (".."+os.sep)*3+"data"+os.sep+label
     i = 0
@@ -204,16 +224,18 @@ for label in data_labels:
             with open(java_dir + os.sep + (filename.replace(".json", ".java"))) as javaFile:
                 parse = json.load(parseFile)
                 counts = {}
-                count_nodes(parse, counts)
-                count_bitrees(parse, counts)
-                count_tritrees(parse, counts) 
-                count_node_characteristics(parse, counts)
-                counts["depth"] = get_depth(parse, 1)
-                count_style(javaFile, counts)
+                if "struc" in features: count_nodes(parse, counts)
+                if "struc" in features: count_bitrees(parse, counts)
+                if "struc" in features: count_tritrees(parse, counts) 
+                if "struc" in features:  count_node_characteristics(parse, counts)
+                if "style" in features: count_style(javaFile, counts)
+                if not counts: 
+                    print "Error: No features selected. Chose style, struc, or all."
+                    exit()
                 countsCollection.append(counts)
                 base_labels.append(label)
         i += 1
-    print "  for %s (%d files)" % (label, i)
+    print "  Got %s (%d files)" % (label, i)
 
 types = []
 for counts in countsCollection:
@@ -244,48 +266,42 @@ for counts in countsCollection:
     base_corpus.append(counts_vec)
 
 # Yeah, this will take up a lot of space...
-if MODE=="MAXSIM": base_corpus = [trim(vec) for vec in base_corpus]
+if MODE=="MAXSIM" or MODE=="TSNE": base_corpus = [trim(vec) for vec in base_corpus]
 
 
 model = models.TfidfModel(base_corpus)
 vector = model[base_corpus[0]]
 modeled_vecs = [model[vec] for vec in base_corpus]
 
-untrimmed_vecs = [untrim(vec, max_length) for vec in modeled_vecs] if MODE=="MAXSIM" else np.array([[y[1] for y in x] for x in base_corpus])
+if MODE=="TSNE":
+    untrimmed_vecs = [untrim(vec, max_length) for vec in modeled_vecs]
+    tsne = TSNE(n_components=2, init='random')
+    flattened = tsne.fit_transform(untrimmed_vecs)
 
-tsne = TSNE(n_components=2, init='random')
-flattened = tsne.fit_transform(untrimmed_vecs)
+    prev_label = base_labels[0]
+    separated = []
+    separated.append([])
+    colors = cm.rainbow(np.linspace(0,1,len(data_labels)))
 
-prev_label = base_labels[0]
-separated = []
-separated.append([])
-colors = cm.rainbow(np.linspace(0,1,len(data_labels)))
+    for label, l in zip(base_labels, flattened):
+        if label != prev_label:
+            prev_label = label
+            separated.append([])
+        separated[len(separated) - 1].append(l)
 
-for label, l in zip(base_labels, flattened):
-    if label != prev_label:
-        prev_label = label
-        separated.append([])
+    fig, ax = plt.subplots()
+    for l, color, data_label in zip(separated, colors, data_labels):
+        x = [a[0] for a in l[:]]
+        y = [a[1] for a in l[:]]
+        col = ax.scatter(x, y, c = color, label=data_label, alpha = 0.3)
 
-    separated[len(separated) - 1].append(l)
-
-fig, ax = plt.subplots()
-
-
-for l, color, data_label in zip(separated, colors, data_labels):
-    x = [a[0] for a in l[:]]
-    y = [a[1] for a in l[:]]
-    col = ax.scatter(x, y, c = color, label=data_label, alpha = 0.3)
-    
-    # Sometimes it's nice to be able to locate files, so here's that:
-    # for name, location in zip(filenames[data_label], l):
-    #     print " File %s is at %2.0f, %2.0f" % (name, location[0], location[1])
-
-ax.legend()
-# plt.show()
+    ax.legend()
+    plt.show()
+    exit()
 
 
 
-n = 10 # number of subsamples
+
 k = len(base_corpus)/n # number of elements per subsample
 
 print "Calculating similarities (%d-fold, %d per sample)..." % (n, k)
@@ -327,12 +343,12 @@ for i in xrange(0, n):
         labels = le.fit_transform(labels)
 
         scikit_model = NuSVC(gamma='scale')
-        # scikit_model = OneVsRestClassifier(estimator=SVC(gamma='scale', random_state=0, C=2))
         scikit_model.fit(np.array([[y[1] for y in x] for x in corpus]), np.array(labels))
 
         uvec = np.array([[u[1] for u in v] for v in test_vecs])
         guess = scikit_model.predict(uvec)
-        print guess
+
+        # Make the labels human-readable again (with the bonus of transforming the outputs too!)
         labels = le.inverse_transform(labels)
         guess = le.inverse_transform(guess)
 
@@ -362,6 +378,12 @@ for i in xrange(0, n):
 
             confusion_matrix[str(labels[int(max_index)])][label] += 1   
             results.append(1 if labels[int(max_index)] == label else 0)
+
+    if MODE == "BASE":
+        for real in test_labels:
+            guess = random.choice(base_labels)
+            results.append(1 if guess == real else 0)
+            confusion_matrix[guess][real] += 1
 
 
     if results != []:
