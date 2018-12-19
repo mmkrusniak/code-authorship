@@ -150,7 +150,7 @@ def count_style(file, counts):
     counts["style/line_len"] /= counts["style/num_lines"]
 
 
-# Vector processing methods to add and remove vectors with zero counts.
+# Vector processing methods to add and remove vectors with zero counts, as required by gensim
 def trim(vec):
     result = []
     for tup in vec:
@@ -272,7 +272,7 @@ if MODE=="MAXSIM" or MODE=="TSNE": base_corpus = [trim(vec) for vec in base_corp
 model = models.TfidfModel(base_corpus)
 vector = model[base_corpus[0]]
 modeled_vecs = [model[vec] for vec in base_corpus]
-
+# Creates graphs for data visualization
 if MODE=="TSNE":
     untrimmed_vecs = [untrim(vec, max_length) for vec in modeled_vecs]
     tsne = TSNE(n_components=2, init='random')
