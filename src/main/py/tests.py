@@ -12,6 +12,11 @@ import sys # also file io
 
 # GenSim, for SVM/TF-IDF
 from gensim import corpora, models, similarities
+import gensim
+from sklearn.svm import *
+from sklearn.multiclass import *
+from sklearn.preprocessing import LabelEncoder
+
 
 # Utilities for plot drawing
 from sklearn.manifold import TSNE # for vector flattening
@@ -138,13 +143,13 @@ def get_depth(parse, current_depth):
     return max_depth
 
 def trim(vec):
-    to_remove = []
+    result = []
     for tup in vec:
-        if tup[1] == 0:
-            to_remove.append(tup)
+        if tup[1] != 0:
+            result.append(tup)
 
-    for tup in to_remove:
-        vec.remove(tup)
+    return result
+
 
 def untrim(vec, length):
     out_vec = []
@@ -163,11 +168,18 @@ def untrim(vec, length):
 
     return out_vec
 
+MODE = "SVM" # "MAXSIM" or "SVM"
+
+
+# Average accuracy for 10-fold cross validation is: 97.85%
+# Average F-score for 10-fold cross validation is: 97.86%
+
 countsCollection = []
 base_labels = []
 num_files = {}
+max_num_files = 18
 
-data_labels = ("play", "bot", "turtle", "bined", "camera")
+data_labels = ("mk", "kr")
 filenames = {}
 for label in data_labels: filenames[label] = []
 
@@ -182,8 +194,9 @@ for label in data_labels:
 for label in data_labels:
     data_dir = (".."+os.sep)*3+"out"+os.sep+label
     java_dir = (".."+os.sep)*3+"data"+os.sep+label
-    print "  for %s (%d files)" % (label, len(os.listdir(data_dir)))
+    i = 0
     for filename in os.listdir(data_dir):
+        if i >= max_num_files: break
         filenames[label] += [label + "/" + filename.replace(".json", ".java")]
         if label not in num_files: num_files[label] = 0
         num_files[label] += 1
@@ -199,6 +212,8 @@ for label in data_labels:
                 count_style(javaFile, counts)
                 countsCollection.append(counts)
                 base_labels.append(label)
+        i += 1
+    print "  for %s (%d files)" % (label, i)
 
 types = []
 for counts in countsCollection:
@@ -228,13 +243,15 @@ for counts in countsCollection:
 
     base_corpus.append(counts_vec)
 
-for vec in base_corpus:
-    trim(vec)
+# Yeah, this will take up a lot of space...
+if MODE=="MAXSIM": base_corpus = [trim(vec) for vec in base_corpus]
+
 
 model = models.TfidfModel(base_corpus)
 vector = model[base_corpus[0]]
 modeled_vecs = [model[vec] for vec in base_corpus]
-untrimmed_vecs = [untrim(vec, max_length) for vec in modeled_vecs]
+
+untrimmed_vecs = [untrim(vec, max_length) for vec in modeled_vecs] if MODE=="MAXSIM" else np.array([[y[1] for y in x] for x in base_corpus])
 
 tsne = TSNE(n_components=2, init='random')
 flattened = tsne.fit_transform(untrimmed_vecs)
@@ -243,6 +260,7 @@ prev_label = base_labels[0]
 separated = []
 separated.append([])
 colors = cm.rainbow(np.linspace(0,1,len(data_labels)))
+
 for label, l in zip(base_labels, flattened):
     if label != prev_label:
         prev_label = label
@@ -275,6 +293,7 @@ print "Calculating similarities (%d-fold, %d per sample)..." % (n, k)
 accuracies = []
 fscores = []
 for i in xrange(0, n):
+
     confusion_matrix = {}
     for u in data_labels: 
         confusion_matrix[u] = {}
@@ -288,6 +307,7 @@ for i in xrange(0, n):
         print "  stubbed iteration %d, used only %d vectors." % (i, len(test_vecs))
         
 
+    # Separate the test data
     test_labels = []
     test_vecs = []
     labels = list(base_labels)
@@ -298,35 +318,51 @@ for i in xrange(0, n):
         labels[j] = None
         corpus[j] = None
 
+    # Get rid of the documents we added to the test data
     labels = [x for x in labels if x is not None]
     corpus = [x for x in corpus if x is not None]
 
+    if MODE=="SVM":
+        le = LabelEncoder()
+        labels = le.fit_transform(labels)
 
-    tfidf = models.TfidfModel(corpus)
-    index = similarities.SparseMatrixSimilarity(tfidf[corpus], num_features=len(types))
+        scikit_model = NuSVC(gamma='scale')
+        # scikit_model = OneVsRestClassifier(estimator=SVC(gamma='scale', random_state=0, C=2))
+        scikit_model.fit(np.array([[y[1] for y in x] for x in corpus]), np.array(labels))
 
-    results = []
-    for j in range(0, len(test_vecs)):
-        #print str(float(j)/len(test_vecs) * 100) + "% through fold " +  str(float(i)/n)
-        test_vec = test_vecs[j]
-        label = test_labels[j]
-        sims = index[tfidf[test_vec]]
-        max_index = 0
-        max_similarity = 0
-        for (sim_index, similarity) in list(enumerate(sims)):
-            if float(similarity) > max_similarity:
-                max_similarity = float(similarity)
-                max_index = int(sim_index)
+        uvec = np.array([[u[1] for u in v] for v in test_vecs])
+        guess = scikit_model.predict(uvec)
+        print guess
+        labels = le.inverse_transform(labels)
+        guess = le.inverse_transform(guess)
 
-        if str(labels[int(max_index)]) == str(label):
-            # print "correct"
-            results.append(1)
-            confusion_matrix[label][label] += 1
-            # We don't really need to keep track of true negatives
-        else:
-            # print "incorrect"
-            results.append(0)
-            confusion_matrix[str(labels[int(max_index)])][label] += 1
+        for real, guess in zip(test_labels, guess): 
+            results.append(1 if guess == real else 0)
+            confusion_matrix[guess][real] += 1
+
+
+    if MODE == "MAXSIM":
+
+        tfidf = models.TfidfModel(corpus)
+        index = similarities.SparseMatrixSimilarity(tfidf[corpus], num_features=len(types))
+        gensim.models.tfidfmodel.smartirs_wglobal(18, 47, 't')
+
+        results = []
+        for j in range(0, len(test_vecs)):
+            #print str(float(j)/len(test_vecs) * 100) + "% through fold " +  str(float(i)/n)
+            test_vec = test_vecs[j]
+            label = test_labels[j]
+            sims = index[tfidf[test_vec]]
+            max_index = 0
+            max_similarity = 0
+            for (sim_index, similarity) in list(enumerate(sims)):
+                if float(similarity) > max_similarity:
+                    max_similarity = float(similarity)
+                    max_index = int(sim_index)
+
+            confusion_matrix[str(labels[int(max_index)])][label] += 1   
+            results.append(1 if labels[int(max_index)] == label else 0)
+
 
     if results != []:
         accuracy = float(sum(results)) / len(results)
